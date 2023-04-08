@@ -14,5 +14,7 @@ public class Movie {
     Genre genre;
     public Movie(CreateMovie createMovie){
         log.debug("Constructing movie with createMovie - {}",createMovie);
+        this.title= createMovie.getTitle();
+        this.genre=createMovie.getGenre();
     }
 }
