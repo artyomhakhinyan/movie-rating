@@ -2,15 +2,18 @@ package aca.demo.movierating.movie;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
+@Component
 public class MovieService {
     private final MovieRepository movieRepository;
 
     public List<Movie> search(Genre genre) {
+
         log.debug("Starts MovieService.search() method with genre{}",genre);
         return movieRepository.findByGenre(genre);
 
@@ -21,6 +24,8 @@ public class MovieService {
             throw new IllegalArgumentException();
         movieRepository.save(createMovie);
     }
+
+
 
 
 }
