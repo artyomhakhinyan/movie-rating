@@ -12,6 +12,8 @@ public class MovieRatingApplication {
 
 	public static void main(String[] args) {
 
+
+
 		var applicationContext= SpringApplication.run(MovieRatingApplication.class, args);
 		var movieService = applicationContext.getBean(MovieService.class);
 		movieService.create(new CreateMovie("Forest Gumb",Genre.DRAMA));
@@ -25,7 +27,7 @@ public class MovieRatingApplication {
 			log.info("the movie already exists");
 		}
 
-
+		    
 
 		//var x= applicationContext.getBean(CreateMovie.class,"Forest Gumb",Genre.DRAMA);
 
