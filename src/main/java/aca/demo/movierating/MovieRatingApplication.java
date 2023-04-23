@@ -29,7 +29,7 @@ public class MovieRatingApplication {
 
 		    
 
-		//var x= applicationContext.getBean(CreateMovie.class,"Forest Gumb",Genre.DRAMA);
+
 
 	}
 
