@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Builder
 @Jacksonized
 public class CreateMovie {
-    long id;
+    Long id;
     String title;
     Genre genre;
     LocalDate releasedAt;
