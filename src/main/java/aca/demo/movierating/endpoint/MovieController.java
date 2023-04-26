@@ -1,11 +1,13 @@
 package aca.demo.movierating.endpoint;
 import aca.demo.movierating.movie.*;
 
+import io.swagger.v3.core.util.Json;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,14 +15,42 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputFilter;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("movies")
 @Slf4j
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
+
+
+    @GetMapping("/{id}")
+    public Movie getById(@PathVariable Long id) {
+        return movieService.getById(id);
+
+    }
+    @PostMapping
+    public ResponseEntity create(@RequestBody CreateMovie createMovie){
+      movieService.create(createMovie);
+      return  ResponseEntity.status(201).contentType(MediaType.APPLICATION_JSON).build();
+    }
+
+    @PutMapping("/{id}")
+    public  void update(@PathVariable Long id, @RequestBody UpdateMovie updateMovie) {
+        movieService.update(id,updateMovie);
+    }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        movieService.delete(id);
+    }
+
+    @GetMapping
+    public List<Movie> search(@RequestParam Genre genre,@RequestParam String title,@RequestParam LocalDate releasedBefore, @RequestParam LocalDate releasedAfter) {
+       return movieService.search(genre, title, releasedBefore, releasedAfter);
+    }
 
 //    @PostMapping("movies")
 //    public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {

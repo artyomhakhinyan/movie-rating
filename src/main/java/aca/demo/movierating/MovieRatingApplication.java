@@ -14,8 +14,8 @@ public class MovieRatingApplication {
 
 
 
-//		var applicationContext= SpringApplication.run(MovieRatingApplication.class, args);
-//		var movieService = applicationContext.getBean(MovieService.class);
+	var applicationContext= SpringApplication.run(MovieRatingApplication.class, args);
+	var movieService = applicationContext.getBean(MovieService.class);
 //		movieService.create(new CreateMovie("Forest Gumb",Genre.DRAMA));
 //		movieService.create(new CreateMovie("Horrible Bosses",Genre.COMEDY));
 //		movieService.create(new CreateMovie(" American Beauty",Genre.DRAMA));
