@@ -16,7 +16,7 @@ public class MovieRepository {
 
     public Optional<Movie> findById(Long id) {
         log.debug("Starts findById method with id -{}",id);
-        return movies.stream().filter(movie->movie.getTitle().equals(id)).findAny();
+        return movies.stream().filter(movie->movie.getId().equals(id)).findAny();
     }
 
 
