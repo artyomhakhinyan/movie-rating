@@ -40,7 +40,7 @@ public class MovieRepository {
                    ( title==null ||movie.getTitle().equals(title))&&
                    (genre==null || movie.getGenre().equals(genre))&&
                    (releasedBefore==null ||movie.getReleasedAt().compareTo(releasedBefore)>=0)&&
-                   ( releasedAfter==null ||movie.getReleasedAt().compareTo(releasedBefore)<=0) ).
+                   (releasedAfter==null ||movie.getReleasedAt().compareTo(releasedBefore)<=0) ).
                   collect(Collectors.toUnmodifiableList());
 
 
