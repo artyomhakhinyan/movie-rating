@@ -16,8 +16,12 @@ import java.util.Optional;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final MovieRepository movieRepository;
 
-    public Review getById(Long id) {
+    public Review getById(Long id,Long movieId) {
+        if(movieRepository.findById(movieId).isEmpty()){
+            throw new MovieNotFoundException("Movie not found");
+        }
         Optional<Review> review=reviewRepository.findById(id);
         if(review.isPresent()){
             return review.get();
@@ -27,18 +31,18 @@ public class ReviewService {
     }
 
     public void create(CreateReview createReview) {
-        if(reviewRepository.findByMovieId(createReview.getMovieId()).isEmpty()){
+        if(movieRepository.findById(createReview.getMovieId()).isEmpty()){
             throw new MovieNotFoundException("Movie not found");
         }
-        if(reviewRepository.findById(createReview.getId()).isEmpty()){
+        if(reviewRepository.findById(createReview.getId()).isPresent()){
             throw new IllegalArgumentException(" id already exists");
         }
         else reviewRepository.persist(new Review(createReview));
     }
 
     public void update(Long id,Long movieId,UpdateReview updateReview) {
-        if(reviewRepository.findByMovieId(movieId).isEmpty()){
-            throw new MovieNotFoundException("movie not found");
+        if(movieRepository.findById(movieId).isEmpty()){
+            throw new MovieNotFoundException("Movie not found");
         }
         if(reviewRepository.findById(id).isEmpty()){
             throw new ReviewNotFoundException("Review not found");
@@ -49,7 +53,7 @@ public class ReviewService {
     }
 
     public  void delete(Long id,Long movieId) {
-        if(reviewRepository.findByMovieId(movieId).isEmpty()){
+        if(movieRepository.findById(movieId).isEmpty()){
             throw new MovieNotFoundException("Movie not found");
         }
         if(reviewRepository.findById(id).isEmpty()){
@@ -58,8 +62,11 @@ public class ReviewService {
         else reviewRepository.delete(reviewRepository.findById(id).get());
     }
 
-    public List<Review> search(String description, Instant updatedBefore, Instant updatedAfter,
+    public List<Review> search(Long movieId,String description, Instant updatedBefore, Instant updatedAfter,
                               Long userId, double ratingHigherThan, double ratingLowerThan) {
+        if(movieRepository.findById(movieId).isEmpty()){
+            throw new MovieNotFoundException("Movie not found");
+        }
         return  reviewRepository.search(description, updatedBefore, updatedAfter, userId, ratingHigherThan, ratingLowerThan);
     }
 

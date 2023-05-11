@@ -48,7 +48,8 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> search(@RequestParam Genre genre,@RequestParam String title,@RequestParam LocalDate releasedBefore, @RequestParam LocalDate releasedAfter) {
+    public List<Movie> search(@RequestParam(required = false) Genre genre,@RequestParam(required = false) String title,
+                              @RequestParam(required = false) LocalDate releasedBefore, @RequestParam(required = false) LocalDate releasedAfter) {
        return movieService.search(genre, title, releasedBefore, releasedAfter);
     }
 

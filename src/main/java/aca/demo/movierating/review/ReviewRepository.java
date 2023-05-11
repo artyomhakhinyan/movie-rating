@@ -24,10 +24,10 @@ public class ReviewRepository {
         return reviews.stream().filter(review->review.getId().equals(id)).findAny();
     }
 
-    public Optional<Review> findByMovieId(Long movieId){
-        log.debug("Starts findByMovieId method with id -{}",movieId);
-        return reviews.stream().filter(review->review.getMovieId().equals(movieId)).findAny();
-    }
+//    public Optional<Review> findByMovieId(Long movieId){
+//        log.debug("Starts findByMovieId method with id -{}",movieId);
+//        return reviews.stream().filter(review->review.getMovieId().equals(movieId)).findAny();
+//    }
 
 
 
@@ -54,7 +54,7 @@ public class ReviewRepository {
                                 (updatedBefore==null ||review.getUpdatedAt().isAfter(updatedBefore))&&
                                 (updatedAfter==null ||review.getUpdatedAt().isBefore(updatedAfter))&&
                                 (ratingHigherThan==0||ratingHigherThan> review.getRating())&&
-                                 (ratingLowerThan==00||ratingLowerThan< review.getRating())).
+                                 (ratingLowerThan==0||ratingLowerThan< review.getRating())).
                 collect(Collectors.toUnmodifiableList());
 
 

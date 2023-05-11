@@ -25,8 +25,8 @@ public class ReviewController {
 
 
     @GetMapping("/{revid}")
-    public Review getById(@PathVariable("revid") Long id) {
-        return reviewService.getById(id);
+    public Review getById(@PathVariable("revid") Long id,@PathVariable("id") Long movieId) {
+        return reviewService.getById(id,movieId);
 
     }
     @PostMapping
@@ -45,8 +45,10 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> search(@RequestParam String description,@RequestParam Instant updatedBefore,@RequestParam Instant updatedAfter,
-                               @RequestParam  Long userId,@RequestParam double ratingHigherThan,@RequestParam double ratingLowerThan) {
-        return reviewService.search(description, updatedBefore, updatedAfter, userId, ratingHigherThan, ratingLowerThan);
+    public List<Review> search(@RequestParam Long id, @RequestParam(required = false) String description,
+                               @RequestParam(required = false) Instant updatedBefore,
+                               @RequestParam(required = false) Instant updatedAfter, @RequestParam(required = false)  Long userId,
+                               @RequestParam(required = false) double ratingHigherThan,@RequestParam(required = false) double ratingLowerThan) {
+        return reviewService.search(id,description, updatedBefore, updatedAfter, userId, ratingHigherThan, ratingLowerThan);
     }
 }
