@@ -16,7 +16,6 @@ public class Movie {
     Long id;
     String title;
     Genre genre;
-
     LocalDate releasedAt;
     String director;
     double rating;
