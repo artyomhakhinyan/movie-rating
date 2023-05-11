@@ -1,6 +1,7 @@
 package aca.demo.movierating.endpoint;
 
 import aca.demo.movierating.movie.MovieNotFoundException;
+import aca.demo.movierating.review.ReviewNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,5 +31,14 @@ public class GeneralExceptionHandler {
         log.error(ex.getMessage(),ex);
         return ResponseEntity.status(500).body(errorResponse);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handle(ReviewNotFoundException ex){
+
+        ErrorResponse errorResponse =new ErrorResponse(1003,ex.getMessage(),null);
+        log.error(ex.getMessage(),ex);
+        return ResponseEntity.status(400).body(errorResponse);
+    }
+
 
 }
