@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 @Slf4j
 
@@ -27,10 +29,10 @@ public class MovieRatingApplication {
 //			log.info("the movie already exists");
 //		}
 
-		    
 
 
 
 	}
+
 
 }
