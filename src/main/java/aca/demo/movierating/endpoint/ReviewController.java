@@ -1,6 +1,6 @@
 package aca.demo.movierating.endpoint;
 
-import aca.demo.movierating.movie.*;
+
 import aca.demo.movierating.review.CreateReview;
 import aca.demo.movierating.review.Review;
 import aca.demo.movierating.review.ReviewService;
@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -30,7 +30,7 @@ public class ReviewController {
 
     }
     @PostMapping
-    public ResponseEntity create(@RequestBody CreateReview createReview){
+    public ResponseEntity<Void> create(@RequestBody CreateReview createReview){
         reviewService.create(createReview);
         return  ResponseEntity.status(201).contentType(MediaType.APPLICATION_JSON).build();
     }
@@ -45,7 +45,7 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> search(@RequestParam Long id, @RequestParam(required = false) String description,
+    public List<Review> search(@PathVariable("id") Long id, @RequestParam(required = false) String description,
                                @RequestParam(required = false) Instant updatedBefore,
                                @RequestParam(required = false) Instant updatedAfter, @RequestParam(required = false)  Long userId,
                                @RequestParam(required = false) double ratingHigherThan,@RequestParam(required = false) double ratingLowerThan) {
