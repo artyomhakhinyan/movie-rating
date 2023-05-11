@@ -24,8 +24,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
 
-    @GetMapping("/{id}")
-    public Review getById(@PathVariable Long id) {
+    @GetMapping("/{revid}")
+    public Review getById(@PathVariable("revid") Long id) {
         return reviewService.getById(id);
 
     }
@@ -35,13 +35,13 @@ public class ReviewController {
         return  ResponseEntity.status(201).contentType(MediaType.APPLICATION_JSON).build();
     }
 
-    @PutMapping("/{id}")
-    public  void update(@PathVariable Long id, @RequestBody UpdateReview updateReview) {
-        reviewService.update(id,updateReview);
+    @PutMapping("/{revid}")
+    public  void update(@PathVariable("revid") Long id,@PathVariable("id") Long movieId,@RequestBody UpdateReview updateReview) {
+        reviewService.update(id,movieId,updateReview);
     }
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        reviewService.delete(id);
+    @DeleteMapping("/{revid}")
+    public void delete(@PathVariable("revid") Long id,@PathVariable("id") Long movieId){
+        reviewService.delete(id,movieId);
     }
 
     @GetMapping

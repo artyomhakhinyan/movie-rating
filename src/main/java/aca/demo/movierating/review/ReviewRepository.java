@@ -24,6 +24,12 @@ public class ReviewRepository {
         return reviews.stream().filter(review->review.getId().equals(id)).findAny();
     }
 
+    public Optional<Review> findByMovieId(Long movieId){
+        log.debug("Starts findByMovieId method with id -{}",movieId);
+        return reviews.stream().filter(review->review.getMovieId().equals(movieId)).findAny();
+    }
+
+
 
     public void persist(Review review) {
         log.debug("Starts persist method with review -{}",review);

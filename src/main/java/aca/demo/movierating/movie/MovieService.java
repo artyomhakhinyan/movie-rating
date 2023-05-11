@@ -25,7 +25,7 @@ public class MovieService {
     }
 
     public void create(CreateMovie createMovie) {
-        if(movieRepository.findById(createMovie.getId()).isPresent()){
+        if(movieRepository.findById(createMovie.getId()).isEmpty()){
             throw new IllegalArgumentException(" id already exists");
         }
         else movieRepository.persist(new Movie(createMovie));

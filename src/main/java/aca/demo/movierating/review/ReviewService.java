@@ -27,13 +27,19 @@ public class ReviewService {
     }
 
     public void create(CreateReview createReview) {
-        if(reviewRepository.findById(createReview.getId()).isPresent()){
+        if(reviewRepository.findByMovieId(createReview.getMovieId()).isEmpty()){
+            throw new MovieNotFoundException("Movie not found");
+        }
+        if(reviewRepository.findById(createReview.getId()).isEmpty()){
             throw new IllegalArgumentException(" id already exists");
         }
         else reviewRepository.persist(new Review(createReview));
     }
 
-    public void update(Long id,UpdateReview updateReview) {
+    public void update(Long id,Long movieId,UpdateReview updateReview) {
+        if(reviewRepository.findByMovieId(movieId).isEmpty()){
+            throw new MovieNotFoundException("movie not found");
+        }
         if(reviewRepository.findById(id).isEmpty()){
             throw new ReviewNotFoundException("Review not found");
         }
@@ -42,7 +48,10 @@ public class ReviewService {
         }
     }
 
-    public  void delete(Long id) {
+    public  void delete(Long id,Long movieId) {
+        if(reviewRepository.findByMovieId(movieId).isEmpty()){
+            throw new MovieNotFoundException("Movie not found");
+        }
         if(reviewRepository.findById(id).isEmpty()){
             throw new ReviewNotFoundException("Review not found");
         }
